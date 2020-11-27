@@ -10,6 +10,7 @@
         <script src="js/lib/angular.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/controllers/FotosController.js"></script>
+        <script src="js/directives/minhas-diretivas.js"></script>
     </head>
     <body ng-controller="FotosController">
         <!-- dentro do body -->
@@ -20,14 +21,10 @@
             </div>
 
             <div class="row">
-                <div class="panel panel-default col-md-2" ng-repeat="foto in fotos">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{foto.titulo}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                    </div>
-                </div>
+                <!-- minha diretiva 'meu-painel' que possui um componente filho -->
+                <meu-painel ng-repeat="foto in fotos" titulo={{foto.titulo}}>
+                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+                </meu-painel>
             </div>
             
 
