@@ -15,6 +15,6 @@
     <!-- variaveis entre {{}} sao chamadas de angular expressions e são somente de leitura
         para mostrar um texto ao usuario -->
     <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: {titulo: filtro}" titulo={{foto.titulo}}>
-        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+        <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
     </meu-painel>
 </div>

@@ -28,3 +28,18 @@ app.directive('meuPainel', function () {
    
     return ddo;
 });
+
+app.directive('minhaFoto', function() {
+    var ddo = {};
+
+    ddo.restrict = "AE";
+
+    ddo.scope = {
+        url: '@',
+        titulo: '@'
+    }
+
+    ddo.templateUrl = 'js/directives/minha-foto.html'
+
+    return ddo; 
+});
