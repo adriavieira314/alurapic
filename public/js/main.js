@@ -10,7 +10,8 @@ angular.module('alurapic', ['minhasDiretivas', 'ngAnimate', 'ngRoute'])
         });
 
         $routeProvider.when('/foto/new', {
-            templateUrl: 'partials/foto.html'
+            templateUrl: 'partials/fotoCadastro.html',
+            controller: 'FotoCadastroController'
         });
 
         //caso o usuario digite um endereco que não exista, ele será redirecionado para rota principal
