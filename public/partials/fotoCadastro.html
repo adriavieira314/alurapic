@@ -2,22 +2,33 @@
     <h1>{{foto.titulo}}</h1>
 </div>
 
-<form name="formulario" class="row" ng-submit="submeter()">
+<p class="alert alert-info" ng-show="mensagem.length">{{mensagem}}</p>
+<!-- novalidate desabilita a validaçao do HTML5 -->
+<form novalidate name="formulario" class="row" ng-submit="submeter()">
     <div class="col-md-6">
         <div class="form-group">
             <label>Título</label>
-            <input name="titulo" class="form-control" ng-model="foto.titulo">    
+            <input name="titulo" class="form-control" ng-model="foto.titulo" ng-maxlength="10" required>
+            <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.titulo.$error.required">
+                Título obrigatório
+            </span>    
+            <span class="form-control alert-danger" ng-show="formulario.titulo.$error.maxlength">
+                No máximo 10 caracteres!
+            </span>    
         </div>
         <div class="form-group">
             <label>URL</label>
-            <input name="url" class="form-control" ng-model="foto.url">
+            <input name="url" class="form-control" ng-model="foto.url" required>
+            <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.url.$error.required">
+                URL obrigatório
+            </span>
         </div>
         <div class="form-group">
             <label>Descrição</label>
             <textarea name="descricao" class="form-control" ng-model="foto.descricao"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
             Salvar
         </button>
          <a href="/" class="btn btn-primary">Voltar</a>
