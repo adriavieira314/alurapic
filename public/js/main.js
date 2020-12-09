@@ -14,6 +14,11 @@ angular.module('alurapic', ['minhasDiretivas', 'ngAnimate', 'ngRoute'])
             controller: 'FotoCadastroController'
         });
 
+        $routeProvider.when('/fotos/edit/:fotoId', {
+            templateUrl: 'partials/fotoCadastro.html',
+            controller: 'FotoCadastroController'
+        })
+
         //caso o usuario digite um endereco que não exista, ele será redirecionado para rota principal
         $routeProvider.otherwise({ redirectTo: '/fotos' });
     });
