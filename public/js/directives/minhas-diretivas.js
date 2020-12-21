@@ -58,3 +58,28 @@ app.directive('meuBotaoPerigo', function() {
 
     return ddo; 
 });
+
+app.directive('meuFocus', function() {
+    var ddo= {};
+
+    ddo.restrict = 'A';
+
+    ddo.scope = {
+        focado: '=' //modificar que cria uma relação bidirecional, ou seja, FotoController e a diretiva meuFocus trabalharão com a mesma referência para $scope.focado
+        //Se focado mudar na diretiva, mudará no controller, se mudar no controller, mudará na diretiva
+    };
+
+    ddo.link = function(scope, element) {
+        //scope é um escopo de um controller
+        scope.$watch('focado', function() {
+            //executa toda vez que o valor de focado mudar
+            //usar muito o $watch pode haver uma queda de performance
+            if (scope.focado) {
+                element[0].focus(); //O element é um elemento DOM, porém encapsulado pelo jqLite
+                scope.focado = false;
+            }
+        })
+    }
+
+    return ddo;
+});
