@@ -1,4 +1,4 @@
-angular.module('alurapic').controller('FotoCadastroController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+angular.module('alurapic').controller('FotoCadastroController', ['$scope', 'recursoFoto', '$routeParams', function ($scope, recursoFoto, $routeParams) {
 
     //quando vazio e usado um ng-model  na view, o objeto é criado automaticamente
     $scope.foto = {};
@@ -6,43 +6,37 @@ angular.module('alurapic').controller('FotoCadastroController', ['$scope', '$htt
 
     //com routeParams tenho acesso aos parametros passados na rota
     if ($routeParams.fotoId) {
-        //identificando a foto pelo id
-        $http.get('/v1/fotos/' + $routeParams.fotoId)
-        .success(function(foto) {
-            // console.log($routeParams.fotoId);
-            $scope.foto = foto;
-        })
-        .error(function(erro) {
+        //obtendo a foto e seus dados
+        recursoFoto.get({fotoId: $routeParams.fotoId}, function(foto) {
+            $scope.foto = foto; 
+        }, function(erro) {
             console.log(erro);
             $scope.mensagem = 'Não foi possível obter a foto';
-        })
+        });
     }
 
     $scope.submeter = function() {
         if ($scope.formulario.$valid) {
             //se na URL houver parametros, ela nos leva para a rota de ediçao
             if ($routeParams.fotoId) {
-                $http.put('/v1/fotos/' + $scope.foto._id, $scope.foto)
-                .success(function() {
+                recursoFoto.update({fotoId: $scope.foto._id}, $scope.foto, function() {
                     $scope.mensagem = 'Foto ' + $scope.foto.titulo + ' foi alterada';
-                })
-                .error(function(erro) {
+                }, function(erro) {
                     console.log(erro);
                     $scope.mensagem = 'Não foi possível alterar';
-                })
+                });
 
             } else {
                 //se não, ela nos leva para a rota de cadastro
-                $http.post('/v1/fotos', $scope.foto)
-                .success(function() {
+                //save faz uma requisição do tipo POST
+                recursoFoto.save($scope.foto, function() {
                     $scope.foto = {};
                     $scope.formulario.$setPristine();
                     $scope.mensagem = 'Foto adicionada com sucesso!';
-                })
-                .error(function(erro) {
+                }, function(erro) {
                     console.log(erro);
                     $scope.mensagem = 'Não foi possível cadastrar a imagem!';
-                })
+                });
             }
         }
     };

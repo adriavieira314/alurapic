@@ -8,3 +8,7 @@
 {"titulo":"teste","url":"https://picsum.photos/200","descricao":"teste","grupo":2,"_id":"9FgKL5EvMOYTPUNs"}
 {"titulo":"Paradise","url":"https://picsum.photos/200","descricao":"Hello","grupo":1,"_id":"nJwdCJQHKAXz4ude"}
 {"$$deleted":true,"_id":"9FgKL5EvMOYTPUNs"}
+{"$$deleted":true,"_id":"nJwdCJQHKAXz4ude"}
+{"titulo":"Rely","url":"https://picsum.photos/id/1003/200","descricao":"Rely","grupo":3,"_id":"YZplI1L2a9PNH0CM"}
+{"titulo":"Cervo","url":"https://picsum.photos/id/1003/200","descricao":"Rely","grupo":3,"_id":"YZplI1L2a9PNH0CM"}
+{"titulo":"Casa","url":"https://picsum.photos/id/1009/200","descricao":"Casa","grupo":2,"_id":"j562yMqfFW0YA7AZ"}
