@@ -1,4 +1,5 @@
-angular.module('alurapic').controller('FotoCadastroController', ['$scope', 'recursoFoto', '$routeParams', function ($scope, recursoFoto, $routeParams) {
+angular.module('alurapic').controller('FotoCadastroController', ['$scope', 'recursoFoto', '$routeParams', 'cadastroDeFotos', 
+function ($scope, recursoFoto, $routeParams, cadastroDeFotos) {
 
     //quando vazio e usado um ng-model  na view, o objeto é criado automaticamente
     $scope.foto = {};
@@ -17,27 +18,14 @@ angular.module('alurapic').controller('FotoCadastroController', ['$scope', 'recu
 
     $scope.submeter = function() {
         if ($scope.formulario.$valid) {
-            //se na URL houver parametros, ela nos leva para a rota de ediçao
-            if ($routeParams.fotoId) {
-                recursoFoto.update({fotoId: $scope.foto._id}, $scope.foto, function() {
-                    $scope.mensagem = 'Foto ' + $scope.foto.titulo + ' foi alterada';
-                }, function(erro) {
-                    console.log(erro);
-                    $scope.mensagem = 'Não foi possível alterar';
-                });
-
-            } else {
-                //se não, ela nos leva para a rota de cadastro
-                //save faz uma requisição do tipo POST
-                recursoFoto.save($scope.foto, function() {
-                    $scope.foto = {};
-                    $scope.formulario.$setPristine();
-                    $scope.mensagem = 'Foto adicionada com sucesso!';
-                }, function(erro) {
-                    console.log(erro);
-                    $scope.mensagem = 'Não foi possível cadastrar a imagem!';
-                });
-            }
+            cadastroDeFotos.cadastrar($scope.foto)
+            .then(function(dados) {
+                $scope.mensagem = dados.mensagem;
+                if (dados.inclusao) $scope.foto = {};
+            })
+            .catch(function(erro) {
+                $scope.mensagem = erro.mensagem;
+            })
         }
     };
 
