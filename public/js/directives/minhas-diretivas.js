@@ -71,13 +71,10 @@ app.directive('meuFocus', function() {
 
     ddo.link = function(scope, element) {
         //scope é um escopo de um controller
-        scope.$watch('focado', function() {
+        scope.$on('fotoCadastrada', function() {
             //executa toda vez que o valor de focado mudar
-            //usar muito o $watch pode haver uma queda de performance
-            if (scope.focado) {
-                element[0].focus(); //O element é um elemento DOM, porém encapsulado pelo jqLite
-                scope.focado = false;
-            }
+            //usar muito o $watch pode haver uma queda de performance, para isso podeos usar o $broadcast
+            element[0].focus(); //O element é um elemento DOM, porém encapsulado pelo jqLite
         })
     }
 

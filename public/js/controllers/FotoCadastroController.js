@@ -22,7 +22,7 @@ function ($scope, recursoFoto, $routeParams, cadastroDeFotos) {
             .then(function(dados) {
                 $scope.mensagem = dados.mensagem;
                 if (dados.inclusao) $scope.foto = {};
-                $scope.focado = true;
+                $scope.$broadcast('fotoCadastrada');
             })
             .catch(function(erro) {
                 $scope.mensagem = erro.mensagem;
