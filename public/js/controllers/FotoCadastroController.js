@@ -33,9 +33,10 @@ angular.module('alurapic').controller('FotoCadastroController', ['$scope', '$htt
 
             } else {
                 //se não, ela nos leva para a rota de cadastro
-                $http.post('/fotos', $scope.foto)
+                $http.post('/v1/fotos', $scope.foto)
                 .success(function() {
                     $scope.foto = {};
+                    $scope.formulario.$setPristine();
                     $scope.mensagem = 'Foto adicionada com sucesso!';
                 })
                 .error(function(erro) {

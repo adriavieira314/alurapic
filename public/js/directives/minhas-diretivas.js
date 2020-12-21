@@ -43,3 +43,18 @@ app.directive('minhaFoto', function() {
 
     return ddo; 
 });
+
+app.directive('meuBotaoPerigo', function() {
+    var ddo = {};
+
+    ddo.restrict = "E";
+
+    ddo.scope = {
+        nome: '@',
+        acao: '&' //modificador que permite fazer binding para uma referência, exemplo, como uma funcao.
+    }
+
+    ddo.template = '<button class="btn btn-danger btn-block" ng-click="acao()">{{nome}}</button>';
+
+    return ddo; 
+});
