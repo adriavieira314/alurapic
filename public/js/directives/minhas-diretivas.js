@@ -69,6 +69,7 @@ app.directive('meuFocus', function() {
         //Se focado mudar na diretiva, mudará no controller, se mudar no controller, mudará na diretiva
     };
 
+    //link cuja função nos dá acesso ao elemento do DOM no qual ela foi adicionada na marcação HTML, inclusive ao escopo privado da diretiva
     ddo.link = function(scope, element) {
         //scope é um escopo de um controller
         scope.$on('fotoCadastrada', function() {

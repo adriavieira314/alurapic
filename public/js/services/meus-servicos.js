@@ -13,8 +13,11 @@ angular.module('meusServicos', ['ngResource'])
         });
     }])
 
-    .factory('cadastroDeFotos', ['recursoFoto', '$q', function(recursoFoto, $q) { //servico de cadastro e atualizacao
+    .factory('cadastroDeFotos', ['recursoFoto', '$q', '$rootScope', function(recursoFoto, $q, $rootScope) { //servico de cadastro e atualizacao
         //$q retorna uma promise
+
+        var evento = 'fotoCadastrada';
+
         var service = {};
         service.cadastrar = function(foto) {
             //resolve(recebe como valor os dados que desejamos acessar chamando a função then)
@@ -23,6 +26,7 @@ angular.module('meusServicos', ['ngResource'])
                 //ediçao da foto
                 if (foto._id) {
                     recursoFoto.update({fotoId: foto._id}, foto, function() {
+                        $rootScope.$broadcast(evento); //ouve o evento
                         resolve({
                             mensagem: 'Foto ' + foto.titulo + ' atualizada com sucesso',
                             inclusao: false
@@ -37,6 +41,7 @@ angular.module('meusServicos', ['ngResource'])
                     //cadastro da foto
                     //save faz uma requisição do tipo POST
                     recursoFoto.save(foto, function() {
+                        $rootScope.$broadcast(evento); //ouve o evento
                         resolve({
                             mensagem: 'Foto ' + foto.titulo + ' cadastrada com sucesso!',
                             inclusao: true
